@@ -1,9 +1,14 @@
 from openpyxl import load_workbook
 import streamlit as st
+import requests                                  # para descargar de internet
+from io import BytesIO        
 
 def get_data_excel():
     try:
-        libro = load_workbook(r"G:\Mi unidad\PRESUPUESTO GASTOS.xlsx", data_only=True)
+        id_excel = st.secrets["EXCEL_ID"]                # el ID que guardaste en Secrets
+        url = f"https://drive.google.com/uc?export=download&id={id_excel}"   # link de descarga de Drive
+        respuesta = requests.get(url)                    # baja el Excel desde Drive
+        libro = load_workbook(BytesIO(respuesta.content), data_only=True)   # lo abre sin guardarlo
         hoja_INGRESOS = libro["INGRESOS"]
 
         valor = hoja_INGRESOS["P11"].value
