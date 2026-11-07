@@ -30,7 +30,7 @@ def get_data_excel():
 
     # esta parte es para extraer datos del excel ---------------------
     try:
-            libro = load_workbook(io.BytesIO(requests.get(f"https://drive.google.com/uc?export=download&id={st.secrets['EXCEL_ID']}").content), data_only=True)
+        libro = load_workbook(io.BytesIO(requests.get(f"https://drive.google.com/uc?export=download&id={st.secrets['EXCEL_ID']}").content), data_only=True)
         hoja_INGRESOS = libro["INGRESOS"]
 
         valor = hoja_INGRESOS["P11"].value
