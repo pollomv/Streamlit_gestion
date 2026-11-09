@@ -128,7 +128,8 @@ def main():
                     muestra_noticias()
 
     elif st.session_state["eleccion"] == "cedears_acciones":
-        from consulta_cedear_acciones import muestra_cedear_acciones
+        #from consulta_cedear_acciones import muestra_cedear_acciones
+        from consulta_api_cedears_acciones import muestra_cedear_acciones
         
         st.subheader("🪙 Cotizacion Cedears y Acciones")
         with st.spinner("Obteniendo cotizaciones de Cedears y acciones..."): 
