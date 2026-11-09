@@ -98,24 +98,30 @@ def busca_partidos():
 
 def muestra_partidos():
     partidos = busca_partidos()  
-    for por_dia in partidos:
-        with st.container(border=True):
-            st.markdown(f"#### 📅 {por_dia}")
+    if not partidos:
+        st.error("No hay partidos esta semana")
+    else:
+        
+        for por_dia in partidos:
+            with st.container(border=True):
+                st.markdown(f"#### 📅 {por_dia}")
 
-            st.divider()
-            for partido in partidos[por_dia]:
-                print(f"dia {por_dia}")
-                print(f"match {partido["match"]}")
-                print(f"horario {partido["horario"]}")
-                col_equipos, col_estado = st.columns([3, 1])
+                st.divider()
                 
-                with col_equipos:
+                for partido in partidos[por_dia]:
                     
-                    if "Independiente" in partido["match"] and "ivadavia" not in partido["match"]:
-                        st.warning(f"{partido["match"]}")
-                    else:
-                        st.write(f"⚽ ***{partido["match"]}***")
+                    print(f"dia {por_dia}")
+                    print(f"match {partido["match"]}")
+                    print(f"horario {partido["horario"]}")
+                    col_equipos, col_estado = st.columns([3, 1])
                     
-                with col_estado:
-                    # Muestra la hora si no se jugó, o el resultado si ya terminó
-                    st.write(partido["horario"])
+                    with col_equipos:
+                        
+                        if "Independiente" in partido["match"] and "ivadavia" not in partido["match"]:
+                            st.warning(f"{partido["match"]}")
+                        else:
+                            st.write(f"⚽ ***{partido["match"]}***")
+                        
+                    with col_estado:
+                        # Muestra la hora si no se jugó, o el resultado si ya terminó
+                        st.write(partido["horario"])
