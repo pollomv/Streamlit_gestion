@@ -46,7 +46,7 @@ def scrap_fdos_inversion():
         for tiker in fondo:
 
             url = f"https://estadisticas.cafci.org.ar/fondos/{tiker}"
-            driver.get(url)                       # accedemos a la web de yahoo finance   
+            driver.get(url)                       # accedemos a la web de cafci   
 
             from selenium.webdriver.support.ui import WebDriverWait
             from selenium.webdriver.support import expected_conditions as ExpCond
@@ -73,6 +73,10 @@ def scrap_fdos_inversion():
             #valor_cuota_parte = float(valor_cuota_parte)
             #print(f"{nombre_fondo}  --> {valor_cuota_parte}")
             
+            valor_cuota_parte = f"{float(valor_cuota_parte
+                .replace('.', '')    # saca el punto de miles: '1.388,55' -> '1388,55'
+                .replace(',', '.')   # la coma decimal pasa a punto: '1388,55' -> '1388.55'
+                    ):.2f}"           # float -> texto con 2 decimales: '1388.55'
             data_inversiones[tipo_fondo][nombre_fondo]=valor_cuota_parte
 
     driver.quit()   # cierra el navegador
@@ -80,8 +84,11 @@ def scrap_fdos_inversion():
     return data_inversiones
 
 def mustra_fondos_inv():
+    from consulta_criptos import scrap_criptos
 
     datos = scrap_fdos_inversion()
+    datos_cripto = scrap_criptos()
+    datos["Cripto"] = datos_cripto["Criptos"]
 
     for tipo in datos:
         with st.container(border=True):
