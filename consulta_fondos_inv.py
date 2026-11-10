@@ -73,7 +73,7 @@ def scrap_fdos_inversion():
             #valor_cuota_parte = float(valor_cuota_parte)
             #print(f"{nombre_fondo}  --> {valor_cuota_parte}")
             
-            valor_cuota_parte = f"{float(valor_cuota_parte
+            valor_cuota_parte = f"$ {float(valor_cuota_parte
                 .replace('.', '')    # saca el punto de miles: '1.388,55' -> '1388,55'
                 .replace(',', '.')   # la coma decimal pasa a punto: '1388,55' -> '1388.55'
                     ):.2f}"           # float -> texto con 2 decimales: '1388.55'
