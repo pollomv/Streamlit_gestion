@@ -42,7 +42,7 @@ def scrap_criptos():
     )
     precio = precio.text
     
-    precio = f"{float(precio.replace(',', '')):.2f}"
+    precio = f"U$d {float(precio.replace(',', '')):.2f}"
     print(precio)
 
     nombre = driver.find_element(By.CSS_SELECTOR,'h1[class="heading yf-ndxd9a"]')
