@@ -6,7 +6,6 @@ def api_cedears_acciones():
     precios = {}
     precios["Acciones"]={}
     precios["Cedears"]={}
-    precios["Criptos"]={}
     precios["Acciones U$d"]={}
 
     API_URL = "https://api.iolinversiones.com"
