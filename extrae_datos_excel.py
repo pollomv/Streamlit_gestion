@@ -33,17 +33,33 @@ def get_data_excel():
         libro = load_workbook(io.BytesIO(requests.get(f"https://drive.google.com/uc?export=download&id={st.secrets['EXCEL_ID']}").content), data_only=True)
         hoja_INGRESOS = libro["INGRESOS"]
 
-        valor = hoja_INGRESOS["P11"].value
-        tramo_1 = hoja_INGRESOS["N16"].value
-        tramo_2 = hoja_INGRESOS["O16"].value
-        tramo_3 = hoja_INGRESOS["P16"].value
+        valor = round(hoja_INGRESOS["P11"].value)
+        if valor>999:
+            valor = f"{valor:,}".replace(",", ".")
+
+        tramo_1 = round(hoja_INGRESOS["N16"].value)
+        tramo_2 = round(hoja_INGRESOS["O16"].value)
+        tramo_3 = round(hoja_INGRESOS["P16"].value)
+
+        if tramo_1 > 999:
+            tramo_1_str = f"{tramo_1:,}".replace(",", ".")
+
+        if tramo_2 > 999:
+            tramo_2_str = f"{tramo_2:,}".replace(",", ".")
+
+        if tramo_3 > 999:
+            tramo_3_str = f"{tramo_3:,}".replace(",", ".")
+
         exceso = round((hoja_INGRESOS["P10"].value)*100)*-1
         print(valor)
 
         datos = {
             "tramo1": tramo_1,
+            "tramo1_str": tramo_1_str,
             "tramo2": tramo_2,
+            "tramo2_str": tramo_2_str,
             "tramo3": tramo_3,
+            "tramo3_str": tramo_3_str,
             "actual" : valor,
             "exceso" : exceso,
             "dolar_oficial" : ultima_cotizacion_oficial,
@@ -81,23 +97,27 @@ def muestra_datos_excel():
             with st.container(border=True):
                 st.warning("1er tramo")
                 v1 = datos["tramo1"]
+                v1_str = datos["tramo1_str"]
                 color = "green" if v1 >= 0 else "red"
-                st.markdown(f"##  :{color}[ \\$ {v1}]")
+                st.markdown(f"##  :{color}[ \\$ {v1_str}]")
         with col2:
             with st.container(border=True):
                 st.warning("2do tramo")
                 v2 = datos["tramo2"]
+                v2_str = datos["tramo2_str"]
                 color = "green" if v2 >= 0 else "red"
-                st.markdown(f"##  :{color}[ \\$ {v2}]")                           
+                st.markdown(f"##  :{color}[ \\$ {v2_str}]")                           
         with col3:
             with st.container(border=True):
                 st.warning("3er tramo")
                 v3 = datos["tramo3"]
+                v3_str = datos["tramo3_str"]
                 color = "green" if v3 >= 0 else "red"
-                st.markdown(f"##  :{color}[ \\$ {v3}]") # :{color}[ ... ] pinta todo lo que está entre corchetes.
+                st.markdown(f"##  :{color}[ \\$ {v3_str}]") # :{color}[ ... ] pinta todo lo que está entre corchetes.
                                                     # \\$ es el signo pesos. Sin la barra, Streamlit lo toma como una fórmula y se rompe.
 
         col1,col2,col3 = st.columns(3)
         with col2:
             with st.container(border=True):
                 st.metric(label=f"Actual:", value=datos["actual"], delta=f" {datos["exceso"]} %")
+=f"Actual:", value=datos["actual"], delta=f" {datos["exceso"]} %")
