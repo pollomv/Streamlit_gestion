@@ -31,7 +31,7 @@ def scrap_noticias():
         link = seccion.get_attribute("href")
         rubro = link.replace("https://www.infobae.com/","")
         rubro = rubro.split("/")[0]
-
+        print(rubro)
         if rubro in mis_secciones:
 
             #div_hermano_seccion = seccion.find_element(By.XPATH,'./following-sibling::div[@class="story-card-info"]')
