@@ -120,4 +120,3 @@ def muestra_datos_excel():
         with col2:
             with st.container(border=True):
                 st.metric(label=f"Actual:", value=datos["actual"], delta=f" {datos["exceso"]} %")
-=f"Actual:", value=datos["actual"], delta=f" {datos["exceso"]} %")
