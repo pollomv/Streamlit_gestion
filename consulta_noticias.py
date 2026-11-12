@@ -1,10 +1,11 @@
-import time
+    import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options # para que no muestre cuando se abre el navegador
 from selenium.common.exceptions import NoSuchElementException
 import streamlit as st
 
+@st.cache_data(ttl=600)
 def scrap_noticias():
     ########## para ocultar cuando se abre el navegador ########
     # 1. Configuras para que corra oculto en segundo plano
