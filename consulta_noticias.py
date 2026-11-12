@@ -1,4 +1,4 @@
-    import time
+import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options # para que no muestre cuando se abre el navegador
@@ -21,7 +21,6 @@ def scrap_noticias():
     # 1. Inicializamos el navegador y cargamos la página web objetivo
     # driver = webdriver.Chrome()
     driver.get("https://www.infobae.com/?noredirect")
-    st.write(driver.title, len(driver.page_source))
     time.sleep(1)  # Pausa inicial para asegurar que cargue el DOM base
 
     mis_secciones = ["deportes","economia","sociedad","politica"]
