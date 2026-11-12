@@ -20,6 +20,7 @@ def scrap_noticias():
     # 1. Inicializamos el navegador y cargamos la página web objetivo
     # driver = webdriver.Chrome()
     driver.get("https://www.infobae.com/argentina/")
+    st.write(driver.title, len(driver.page_source))
     time.sleep(1)  # Pausa inicial para asegurar que cargue el DOM base
 
     mis_secciones = ["deportes","economia","sociedad","politica"]
