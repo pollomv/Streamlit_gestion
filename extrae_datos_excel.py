@@ -41,6 +41,10 @@ def get_data_excel():
         tramo_2 = round(hoja_INGRESOS["O16"].value)
         tramo_3 = round(hoja_INGRESOS["P16"].value)
 
+        tramo_1_str = "s/d"
+        tramo_2_str = "s/d"
+        tramo_3_str = "s/d"
+
         if tramo_1 > 999:
             tramo_1_str = f"{tramo_1:,}".replace(",", ".")
 
