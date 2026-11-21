@@ -47,12 +47,18 @@ def get_data_excel():
 
         if tramo_1 > 999:
             tramo_1_str = f"{tramo_1:,}".replace(",", ".")
+        else:
+            tramo_1_str = tramo_1
 
         if tramo_2 > 999:
             tramo_2_str = f"{tramo_2:,}".replace(",", ".")
+        else:
+            tramo_2_str = tramo_2
 
         if tramo_3 > 999:
             tramo_3_str = f"{tramo_3:,}".replace(",", ".")
+        else:
+            tramo_3_str = tramo_3
 
         exceso = round((hoja_INGRESOS["P10"].value)*100)*-1
         print(valor)
