@@ -58,7 +58,7 @@ def api_cedears_acciones():
             # a precios["Cedears"] le arego la llave del Cedear en pesos y le asigno su precio
             precios["Cedears"][dato["instrument"]["name"]]= f"$  {dato["quotes"]["close"] }"
 
-            print(f"{dato["instrument"]["symbol"]} - {dato["instrument"]["name"]} -> {dato["instrument"]["currency"]} {dato["quotes"]["close"]} ")
+            print(f"{dato["instrument"]["symbol"]} - {dato["instrument"]["name"]} -> {dato["instrument"]["currency"]} {dato["quotes"]["last"]} ")
             
     # def paneles(categoria):
     #     r = requests.get(f"{API_URL}/broker/assets/panels",
@@ -79,7 +79,7 @@ def api_cedears_acciones():
                 # a precios["Acciones"] le arego la llave de la accion en pesos y le asigno su precio
                 precios["Acciones"][dato["instrument"]["name"]]= f"$  {dato["quotes"]["close"] }"
 
-                print(f"{dato["instrument"]["symbol"]} - {dato["instrument"]["name"]} -> {dato["instrument"]["currency"]} {dato["quotes"]["close"]} ")
+                print(f"{dato["instrument"]["symbol"]} - {dato["instrument"]["name"]} -> {dato["instrument"]["currency"]} {dato["quotes"]["last"]} ")
 
 
     #  --------------- ACCIONES EN DOLARES-----------------------
