@@ -56,7 +56,7 @@ def api_cedears_acciones():
         if dato["instrument"]["symbol"] in misCedears:
 
             # a precios["Cedears"] le arego la llave del Cedear en pesos y le asigno su precio
-            precios["Cedears"][dato["instrument"]["name"]]= f"$  {dato["quotes"]["close"] }"
+            precios["Cedears"][dato["instrument"]["name"]]= f"$  {dato["quotes"]["last"] }"
 
             print(f"{dato["instrument"]["symbol"]} - {dato["instrument"]["name"]} -> {dato["instrument"]["currency"]} {dato["quotes"]["last"]} ")
             
@@ -77,7 +77,7 @@ def api_cedears_acciones():
         if dato["instrument"]["symbol"] in mis_acciones:
 
                 # a precios["Acciones"] le arego la llave de la accion en pesos y le asigno su precio
-                precios["Acciones"][dato["instrument"]["name"]]= f"$  {dato["quotes"]["close"] }"
+                precios["Acciones"][dato["instrument"]["name"]]= f"$  {dato["quotes"]["last"] }"
 
                 print(f"{dato["instrument"]["symbol"]} - {dato["instrument"]["name"]} -> {dato["instrument"]["currency"]} {dato["quotes"]["last"]} ")
 
