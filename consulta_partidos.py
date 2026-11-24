@@ -23,7 +23,8 @@ def busca_partidos():
     time.sleep(2)  # Pausa inicial para asegurar que cargue el DOM base
 
     # busco con --> contains(dónde buscar, qué buscar)
-    fechas = driver.find_elements(By.XPATH, '//*[contains(@class, "sc-3ec32152-1") or contains(@class, "sc-3ec32152-2")]')
+    
+    fechas = driver.find_elements(By.XPATH, '//*[contains(@class, "sc-276e5717-0 iaBczD") or contains(@class, "sc-3ec32152-2")]')
 
     partidos ={}
 
@@ -44,18 +45,19 @@ def busca_partidos():
             # subimos hasta encontrar el div con una determinada class
             div_ancestor_tipo = tipo_partido.find_element(By.XPATH,'./ancestor::div[@class="tournament-type"]')
 
-            # buscamos en el mimso nivel/hermano (following-sibling) un dic con una class "events"
+            # buscamos en el mimso nivel/hermano (following-sibling) un div con una class "events"
             div_hermano_tipo_partido = div_ancestor_tipo.find_element(By.XPATH,'./following-sibling::div[@class="events"]')
 
             # desde ese div hernano con class events buscamos hacia abajo un div que contiene todos los partidos que esten dentro de la fecha
             divs_partidos = div_hermano_tipo_partido.find_elements(By.XPATH,'.//div[@class="event-info div1"]')
             
             fecha = fecha.text
+            fecha = fecha.split("\n")[0]
+            print(fecha)
             if "Agenda Deportiva del " in fecha:
                 
                 fecha = fecha.replace("Agenda Deportiva del","").strip()
                 
-
             partidos[fecha] = []
             for div_partido in divs_partidos:
                 
@@ -81,13 +83,13 @@ def busca_partidos():
                 team_visitante = div_visitante.find_element(By.XPATH,'.//h3[contains(@class, "event-name ")]').text
                 #print(f"\n{fecha.text}-{horario} \n{team_local} vs {team_visitante}")
                 
-
+                
                 # partidos[fecha][f"{team_local} vs {team_visitante}"] = horario
                 partidos[fecha].append({
                     "match" : f"{team_local} vs {team_visitante}",
                     "horario" : horario
                 })
-            
+                #print(f"{partidos[fecha]}")
                 
         except NoSuchElementException:
             continue
@@ -98,6 +100,7 @@ def busca_partidos():
 
 def muestra_partidos():
     partidos = busca_partidos()  
+    
     if not partidos:
         st.error("No hay partidos esta semana")
     else:
@@ -110,9 +113,9 @@ def muestra_partidos():
                 
                 for partido in partidos[por_dia]:
                     
-                    print(f"dia {por_dia}")
-                    print(f"match {partido["match"]}")
-                    print(f"horario {partido["horario"]}")
+                    #print(f"dia {por_dia}")
+                    #print(f"match {partido["match"]}")
+                    #print(f"horario {partido["horario"]}")
                     col_equipos, col_estado = st.columns([3, 1])
                     
                     with col_equipos:
