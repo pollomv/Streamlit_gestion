@@ -24,7 +24,8 @@ def busca_partidos():
 
     # busco con --> contains(dónde buscar, qué buscar)
     
-    fechas = driver.find_elements(By.CSS_SELECTOR, 'div[class*="sc-276e5717-1"]')
+    #fechas = driver.find_elements(By.CSS_SELECTOR, 'div[class*="sc-276e5717-1"]')
+    fechas = driver.find_elements(By.XPATH, '//div[contains(@class, "sc-276e5717-") and contains(., " de 202")]')
     
     partidos ={}
 
